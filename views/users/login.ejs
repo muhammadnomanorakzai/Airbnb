@@ -1,0 +1,68 @@
+<% layout("/layout/boilerplate") %>
+
+<body class="bg-light">
+  <div class="container my-5">
+    <div
+      class="card shadow-lg border-0 rounded-4 mx-auto p-4"
+      style="max-width: 500px">
+      <h2 class="text-center text-success fw-bold mb-4">Sign In</h2>
+
+      <form method="POST" action="/login" class="needs-validation" novalidate>
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Username</label>
+          <input
+            type="text"
+            name="username"
+            class="form-control rounded-3 shadow-sm"
+            placeholder="Enter your username"
+            required />
+          <div class="invalid-feedback">Please enter your username.</div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Password</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control rounded-3 shadow-sm"
+            placeholder="Enter your password"
+            required />
+          <div class="invalid-feedback">Please enter your password.</div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between align-items-center">
+          <a href="/signup" class="btn btn-outline-secondary px-4">
+            Create an account
+          </a>
+
+          <button class="btn btn-success px-5 fw-semibold">
+            <i class="bi bi-box-arrow-in-right"></i> Sign In
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+<style>
+  .card {
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .form-control:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    transition: 0.2s ease;
+  }
+</style>

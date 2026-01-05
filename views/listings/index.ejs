@@ -1,0 +1,61 @@
+<% layout("/layout/boilerplate") -%>
+<body class="bg-light">
+  <div class="container my-5">
+    <h2 class="text-center text-success mb-4 fw-bold">All Listings</h2>
+    <div class="row g-4">
+      <% for (let listings of allListings) { %>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <a
+          href="/listings/<%= listings._id %>"
+          class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+            <div class="image-container">
+              <img
+                src="<%= listings.image.url %>"
+                alt="<%= listings.title %>"
+                class="card-img-top rounded-top-4"
+                style="height: 220px; object-fit: cover" />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title fw-semibold"><%= listings.title %></h5>
+              <p class="card-text text-muted mb-2">
+                <i class="bi bi-geo-alt-fill text-danger"></i>
+                <%= listings.location %>, <%= listings.country %>
+              </p>
+              <p class="fw-bold mb-0 text-success">
+                &#8377;<%= listings.price.toLocaleString("en-PK") %> / night
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <% } %>
+    </div>
+  </div>
+
+  <style>
+    /* Smooth zoom + opacity effect only on image */
+    .image-container {
+      overflow: hidden;
+    }
+
+    .image-container img {
+      transition: transform 0.5s ease, opacity 0.4s ease;
+    }
+
+    .image-container:hover img {
+      transform: scale(1.08);
+      opacity: 0.9;
+    }
+
+    /* Optional card hover lift */
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</body>
