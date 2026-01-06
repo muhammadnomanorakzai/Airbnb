@@ -19,6 +19,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+
 const PORT = process.env.PORT || 8080;
 
 // ========================================
@@ -40,21 +41,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 // ========================================
-//  STEP 4: DATABASE CONNECTION (ENV)
+//  STEP 4: DATABASE CONNECTION (ENV SAFE)
 // ========================================
 const dbUrl = process.env.MONGO_URL;
 
+if (!dbUrl) {
+  console.error("❌ MONGO_URL is missing in environment variables");
+  process.exit(1);
+}
+
 mongoose
   .connect(dbUrl)
-  .then(() => console.log("📌 MongoDB Connected"))
+  .then(() => console.log("📌 MongoDB Connected Successfully"))
   .catch((err) => console.log("Mongo Error:", err));
 
 // ========================================
-//  STEP 5: SESSION CONFIG (ENV)
+//  STEP 5: SESSION CONFIG (ENV SAFE)
 // ========================================
 const sessionOptions = {
   name: "session",
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || "fallbacksecret",
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -102,7 +108,7 @@ app.get("/", (req, res) => {
 });
 
 // ========================================
-//  STEP 10: SERVER (ENV PORT)
+//  STEP 10: SERVER (RAILWAY SAFE)
 // ========================================
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
