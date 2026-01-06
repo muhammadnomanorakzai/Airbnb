@@ -1,118 +1,424 @@
 <% layout("/layout/boilerplate") -%>
 
-<body class="bg-light">
-  <div class="container my-5">
-    <div
-      class="card shadow-lg border-0 rounded-4 mx-auto p-4"
-      style="max-width: 600px">
-      <h2 class="text-center text-success fw-bold mb-4">Create New Listing</h2>
-
-      <form
-        method="POST"
-        action="/listings"
-        class="needs-validation"
-        novalidate
-        enctype="multipart/form-data">
-        <!-- Title -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Title</label>
-          <input
-            type="text"
-            name="listing[title]"
-            class="form-control rounded-3 shadow-sm"
-            placeholder="Enter your title"
-            required />
-          <div class="valid-feedback">Looks good!</div>
+<div class="container-fluid px-0">
+  <!-- Progress Bar -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <div class="flex-grow-1">
+          <div class="progress" style="height: 6px">
+            <div
+              class="progress-bar bg-airbnb-pink"
+              role="progressbar"
+              style="width: 25%"></div>
+          </div>
+          <div class="d-flex justify-content-between mt-2">
+            <span class="text-airbnb-pink fw-bold">1. Basics</span>
+            <span class="text-muted">2. Details</span>
+            <span class="text-muted">3. Photos</span>
+            <span class="text-muted">4. Pricing</span>
+          </div>
         </div>
-
-        <!-- Description -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Description</label>
-          <textarea
-            name="listing[description]"
-            class="form-control rounded-3 shadow-sm"
-            rows="4"
-            placeholder="Write a short description"
-            required></textarea>
-          <div class="valid-feedback">Looks good!</div>
-        </div>
-        <!-- Image URL -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Upload Image</label>
-          <input
-            type="file"
-            name="listing[image]"
-            class="form-control rounded-3 shadow-sm" />
-        </div>
-
-        <!-- Price -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Price (PKR)</label>
-          <input
-            type="number"
-            name="listing[price]"
-            class="form-control rounded-3 shadow-sm"
-            placeholder="Enter price"
-            min="0"
-            required />
-          <div class="invalid-feedback">Please provide a valid Price.</div>
-        </div>
-
-        <!-- Location -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Location</label>
-          <input
-            type="text"
-            name="listing[location]"
-            class="form-control rounded-3 shadow-sm"
-            placeholder="Enter location"
-            required />
-          <div class="invalid-feedback">Please provide a valid city.</div>
-        </div>
-
-        <!-- Country -->
-        <div class="mb-4">
-          <label class="form-label fw-semibold">Country</label>
-          <input
-            type="text"
-            name="listing[country]"
-            class="form-control rounded-3 shadow-sm"
-            placeholder="Enter country"
-            required />
-          <div class="invalid-feedback">Please provide a valid country.</div>
-        </div>
-
-        <!-- Buttons -->
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="/listings" class="btn btn-outline-secondary px-4">
-            <i class="bi bi-arrow-left"></i> Back
-          </a>
-          <button class="btn btn-success px-5 fw-semibold">
-            <i class="bi bi-plus-circle"></i> Add Listing
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
-</body>
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Header -->
+        <div class="text-center mb-5">
+          <h1 class="display-5 fw-bold mb-3">
+            List your property on WanderLust
+          </h1>
+          <p class="lead text-muted">
+            Share your space with travelers from around the world
+          </p>
+        </div>
+
+        <!-- Form -->
+        <div class="card border-0 shadow-lg">
+          <div class="card-body p-5">
+            <form
+              method="POST"
+              action="/listings"
+              class="needs-validation"
+              novalidate
+              enctype="multipart/form-data">
+              <!-- Property Type -->
+              <div class="mb-4">
+                <label class="form-label fw-bold mb-3"
+                  >What type of property are you listing?</label
+                >
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="propertyType"
+                      id="entirePlace"
+                      value="entire"
+                      checked />
+                    <label
+                      class="btn btn-outline-dark w-100 py-4"
+                      for="entirePlace">
+                      <i class="fas fa-home fa-2x mb-2"></i>
+                      <div>Entire place</div>
+                      <small class="text-muted"
+                        >Guests have the whole place to themselves</small
+                      >
+                    </label>
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="propertyType"
+                      id="privateRoom"
+                      value="private" />
+                    <label
+                      class="btn btn-outline-dark w-100 py-4"
+                      for="privateRoom">
+                      <i class="fas fa-bed fa-2x mb-2"></i>
+                      <div>Private room</div>
+                      <small class="text-muted"
+                        >Guests have a private room for sleeping</small
+                      >
+                    </label>
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="propertyType"
+                      id="sharedRoom"
+                      value="shared" />
+                    <label
+                      class="btn btn-outline-dark w-100 py-4"
+                      for="sharedRoom">
+                      <i class="fas fa-door-open fa-2x mb-2"></i>
+                      <div>Shared room</div>
+                      <small class="text-muted"
+                        >Guests sleep in a common space</small
+                      >
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Title -->
+              <div class="mb-4">
+                <label class="form-label fw-bold"
+                  >Give your listing a title</label
+                >
+                <p class="text-muted small mb-2">
+                  Make it short and catchy to attract guests
+                </p>
+                <input
+                  type="text"
+                  name="listing[title]"
+                  class="form-control form-control-lg"
+                  placeholder="e.g., Beautiful beachfront villa with private pool"
+                  required />
+                <div class="invalid-feedback">
+                  Please provide a compelling title.
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">Description</label>
+                <p class="text-muted small mb-2">
+                  Describe what makes your place special
+                </p>
+                <textarea
+                  name="listing[description]"
+                  class="form-control"
+                  rows="5"
+                  placeholder="Tell guests about your space, amenities, and what makes it unique..."
+                  required></textarea>
+                <div class="invalid-feedback">
+                  Please provide a detailed description.
+                </div>
+              </div>
+
+              <!-- Image Upload -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">Upload photos</label>
+                <p class="text-muted small mb-3">
+                  High-quality photos help your listing stand out
+                </p>
+
+                <div class="border rounded-3 p-4 text-center">
+                  <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                  <h5 class="mb-2">Drag and drop photos here</h5>
+                  <p class="text-muted small mb-3">or click to browse</p>
+
+                  <div class="mb-3">
+                    <input
+                      type="file"
+                      name="listing[image]"
+                      class="form-control"
+                      accept="image/*"
+                      required
+                      multiple />
+                  </div>
+
+                  <p class="text-muted small">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Upload at least 5 photos. Include different angles and
+                    amenities.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Location -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">Location</label>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      name="listing[location]"
+                      class="form-control"
+                      placeholder="City, neighborhood"
+                      required />
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      name="listing[country]"
+                      class="form-control"
+                      placeholder="Country"
+                      required />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Price -->
+              <div class="mb-5">
+                <label class="form-label fw-bold">Set your nightly price</label>
+                <p class="text-muted small mb-2">
+                  You can adjust this later based on demand
+                </p>
+
+                <div
+                  class="input-group input-group-lg mb-3"
+                  style="max-width: 300px">
+                  <span class="input-group-text bg-light fw-bold">₹</span>
+                  <input
+                    type="number"
+                    name="listing[price]"
+                    class="form-control"
+                    placeholder="0"
+                    min="0"
+                    required />
+                  <span class="input-group-text bg-light">/ night</span>
+                </div>
+
+                <div class="form-text">
+                  <i class="fas fa-lightbulb me-1"></i>
+                  Competitive pricing helps your listing get booked faster
+                </div>
+              </div>
+
+              <!-- Amenities -->
+              <div class="mb-5">
+                <label class="form-label fw-bold mb-3">Select amenities</label>
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="amenities[]"
+                        value="wifi"
+                        id="wifi" />
+                      <label class="form-check-label" for="wifi">
+                        <i class="fas fa-wifi me-2"></i> WiFi
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="amenities[]"
+                        value="kitchen"
+                        id="kitchen" />
+                      <label class="form-check-label" for="kitchen">
+                        <i class="fas fa-kitchen-set me-2"></i> Kitchen
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="amenities[]"
+                        value="parking"
+                        id="parking" />
+                      <label class="form-check-label" for="parking">
+                        <i class="fas fa-car me-2"></i> Free parking
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="amenities[]"
+                        value="pool"
+                        id="pool" />
+                      <label class="form-check-label" for="pool">
+                        <i class="fas fa-swimming-pool me-2"></i> Pool
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="amenities[]"
+                        value="ac"
+                        id="ac" />
+                      <label class="form-check-label" for="ac">
+                        <i class="fas fa-snowflake me-2"></i> Air conditioning
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="amenities[]"
+                        value="breakfast"
+                        id="breakfast" />
+                      <label class="form-check-label" for="breakfast">
+                        <i class="fas fa-coffee me-2"></i> Breakfast included
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="d-flex justify-content-between pt-4 border-top">
+                <a href="/listings" class="btn btn-outline-dark px-4">
+                  <i class="fas fa-arrow-left me-2"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-airbnb px-5">
+                  <i class="fas fa-rocket me-2"></i> Publish Listing
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Help Card -->
+        <div class="card border-0 shadow-sm mt-4">
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="flex-shrink-0">
+                <i class="fas fa-question-circle fa-2x text-airbnb-pink"></i>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h6 class="fw-bold">Need help creating your listing?</h6>
+                <p class="text-muted small mb-0">
+                  Check out our
+                  <a href="#" class="text-decoration-none text-airbnb-pink"
+                    >hosting guide</a
+                  >
+                  or
+                  <a href="#" class="text-decoration-none text-airbnb-pink"
+                    >contact support</a
+                  >
+                  for assistance.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <style>
-  /* Smooth card hover */
-  .card {
+  .bg-airbnb-pink {
+    background-color: #ff385c;
+  }
+
+  .text-airbnb-pink {
+    color: #ff385c;
+  }
+
+  .btn-outline-dark {
+    border: 2px solid #dee2e6;
     transition: all 0.3s ease;
   }
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  .btn-outline-dark:hover {
+    border-color: #ff385c;
+    color: #ff385c;
   }
 
-  /* Input focus styling */
+  .btn-check:checked + .btn-outline-dark {
+    background-color: #ff385c;
+    border-color: #ff385c;
+    color: white;
+  }
+
+  .form-control-lg {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
   .form-control:focus {
-    border-color: #198754;
-    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
-  }
-
-  button:hover {
-    transform: scale(1.05);
-    transition: 0.2s ease;
+    border-color: #ff385c;
+    box-shadow: 0 0 0 0.25rem rgba(255, 56, 92, 0.25);
   }
 </style>
+
+<script>
+  // Form validation and preview
+  document.addEventListener("DOMContentLoaded", function () {
+    // Preview uploaded images
+    const fileInput = document.querySelector('input[type="file"]');
+    const uploadArea = document.querySelector(
+      ".fa-cloud-upload-alt"
+    ).parentElement;
+
+    fileInput.addEventListener("change", function (e) {
+      if (this.files.length > 0) {
+        const fileCount = this.files.length;
+        uploadArea.innerHTML = `
+          <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+          <h5 class="mb-2">${fileCount} photo${
+          fileCount > 1 ? "s" : ""
+        } selected</h5>
+          <p class="text-muted small">You can add more photos</p>
+          <input type="file" name="listing[image]" class="form-control" accept="image/*" multiple>
+        `;
+      }
+    });
+
+    // Character counter for description
+    const textarea = document.querySelector(
+      'textarea[name="listing[description]"]'
+    );
+    const charCounter = document.createElement("div");
+    charCounter.className = "text-muted small mt-1 text-end";
+    charCounter.innerHTML = '<span id="charCount">0</span>/5000 characters';
+    textarea.parentNode.appendChild(charCounter);
+
+    textarea.addEventListener("input", function () {
+      document.getElementById("charCount").textContent = this.value.length;
+    });
+  });
+</script>

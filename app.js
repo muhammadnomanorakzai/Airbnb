@@ -103,9 +103,9 @@ app.use("/listings/:id/reviews", reviewsRouter);
 // ========================================
 //  STEP 9: ROOT TEST
 // ========================================
-app.get("/", (req, res) => {
-  res.send("🚀 Backend is running successfully");
-});
+// app.get("/", (req, res) => {
+//   res.send("🚀 Backend is running successfully");
+// });
 
 // ========================================
 //  STEP 10: SERVER (RAILWAY SAFE)

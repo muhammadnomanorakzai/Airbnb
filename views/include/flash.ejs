@@ -1,23 +1,45 @@
+<!-- Success Messages -->
 <% if (success && success.length) { %>
-<div
-  class="alert alert-success alert-dismissible fade show col-6 offset-3"
-  role="alert">
-  <%= success %>
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="alert"
-    aria-label="Close"></button>
+<div class="container mt-4">
+  <div
+    class="alert alert-success alert-dismissible fade show shadow-sm border-0"
+    role="alert"
+    style="border-radius: 12px">
+    <div class="d-flex align-items-center">
+      <i class="fas fa-check-circle fa-lg me-3"></i>
+      <div class="flex-grow-1">
+        <h6 class="alert-heading mb-1">Success!</h6>
+        <p class="mb-0"><%= success %></p>
+      </div>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+  </div>
 </div>
-<% } %> <% if (error && error.length) { %>
-<div
-  class="alert alert-danger alert-dismissible fade show col-6 offset-3"
-  role="alert">
-  <%= error %>
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="alert"
-    aria-label="Close"></button>
+<% } %>
+
+<!-- Error Messages -->
+<% if (error && error.length) { %>
+<div class="container mt-4">
+  <div
+    class="alert alert-danger alert-dismissible fade show shadow-sm border-0"
+    role="alert"
+    style="border-radius: 12px">
+    <div class="d-flex align-items-center">
+      <i class="fas fa-exclamation-triangle fa-lg me-3"></i>
+      <div class="flex-grow-1">
+        <h6 class="alert-heading mb-1">Oops!</h6>
+        <p class="mb-0"><%= error %></p>
+      </div>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+  </div>
 </div>
 <% } %>

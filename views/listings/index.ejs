@@ -1,61 +1,222 @@
 <% layout("/layout/boilerplate") -%>
-<body class="bg-light">
-  <div class="container my-5">
-    <h2 class="text-center text-success mb-4 fw-bold">All Listings</h2>
-    <div class="row g-4">
-      <% for (let listings of allListings) { %>
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <a
-          href="/listings/<%= listings._id %>"
-          class="text-decoration-none text-dark">
-          <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
-            <div class="image-container">
-              <img
-                src="<%= listings.image.url %>"
-                alt="<%= listings.title %>"
-                class="card-img-top rounded-top-4"
-                style="height: 220px; object-fit: cover" />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title fw-semibold"><%= listings.title %></h5>
-              <p class="card-text text-muted mb-2">
-                <i class="bi bi-geo-alt-fill text-danger"></i>
-                <%= listings.location %>, <%= listings.country %>
-              </p>
-              <p class="fw-bold mb-0 text-success">
-                &#8377;<%= listings.price.toLocaleString("en-PK") %> / night
-              </p>
+
+<div class="container-fluid px-0">
+  <!-- Hero Banner -->
+  <div
+    class="bg-dark text-white py-5"
+    style="
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('/images/hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+    ">
+    <div class="container py-5">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-8">
+          <h1 class="display-4 fw-bold mb-4">Find your next adventure</h1>
+          <p class="lead mb-4">
+            Discover unique stays, experiences, and places around the world.
+          </p>
+
+          <!-- Search Bar -->
+          <div
+            class="bg-white rounded-pill p-2 shadow-lg mx-auto"
+            style="max-width: 600px">
+            <div class="input-group">
+              <span class="input-group-text bg-transparent border-0">
+                <i class="fas fa-search text-muted"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control border-0"
+                placeholder="Search destinations, homes, experiences..." />
+              <button class="btn btn-airbnb rounded-pill px-4">
+                <i class="fas fa-search me-2"></i> Search
+              </button>
             </div>
           </div>
-        </a>
+
+          <!-- Quick Filters -->
+          <div class="mt-4">
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a href="#" class="btn btn-light rounded-pill">
+                <i class="fas fa-home me-2"></i> Entire homes
+              </a>
+              <a href="#" class="btn btn-light rounded-pill">
+                <i class="fas fa-umbrella-beach me-2"></i> Beachfront
+              </a>
+              <a href="#" class="btn btn-light rounded-pill">
+                <i class="fas fa-mountain me-2"></i> Mountains
+              </a>
+              <a href="#" class="btn btn-light rounded-pill">
+                <i class="fas fa-swimming-pool me-2"></i> Amazing pools
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <% } %>
     </div>
   </div>
 
-  <style>
-    /* Smooth zoom + opacity effect only on image */
-    .image-container {
-      overflow: hidden;
-    }
+  <!-- Main Content -->
+  <div class="container py-5">
+    <!-- Header with Filters -->
+    <div class="d-flex justify-content-between align-items-center mb-5">
+      <div>
+        <h2 class="fw-bold">Explore all listings</h2>
+        <p class="text-muted mb-0">
+          <%= allListings.length %>+ unique places to stay
+        </p>
+      </div>
+      <div class="dropdown">
+        <button
+          class="btn btn-outline-dark rounded-pill dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown">
+          <i class="fas fa-sliders-h me-2"></i> Sort & Filter
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
+          <li><a class="dropdown-item" href="#">Price: High to Low</a></li>
+          <li><a class="dropdown-item" href="#">Most Popular</a></li>
+          <li><a class="dropdown-item" href="#">Newest First</a></li>
+        </ul>
+      </div>
+    </div>
 
-    .image-container img {
-      transition: transform 0.5s ease, opacity 0.4s ease;
-    }
+    <!-- Listings Grid -->
+    <% if(allListings.length > 0) { %>
+    <div class="row g-4">
+      <% for (let listing of allListings) { %>
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-0 h-100">
+          <!-- Image with Wishlist Button -->
+          <div
+            class="position-relative overflow-hidden"
+            style="border-radius: 12px">
+            <img
+              src="<%= listing.image.url %>"
+              alt="<%= listing.title %>"
+              class="card-img-top"
+              style="height: 250px; object-fit: cover" />
 
-    .image-container:hover img {
-      transform: scale(1.08);
-      opacity: 0.9;
-    }
+            <!-- Wishlist Button -->
+            <button
+              class="btn btn-light rounded-circle position-absolute top-0 end-0 m-3"
+              style="width: 40px; height: 40px">
+              <i class="far fa-heart"></i>
+            </button>
 
-    /* Optional card hover lift */
-    .card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+            <!-- Superhost Badge -->
+            <div class="position-absolute top-0 start-0 m-3">
+              <% if(listing.owner.isSuperhost) { %>
+              <span class="badge bg-dark text-white px-3 py-2">
+                <i class="fas fa-crown me-1"></i> Superhost
+              </span>
+              <% } %>
+            </div>
+          </div>
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    }
-  </style>
-</body>
+          <!-- Card Body -->
+          <div class="card-body px-0 pb-0">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5
+                class="card-title fw-bold mb-0 text-truncate"
+                style="max-width: 70%">
+                <%= listing.title %>
+              </h5>
+              <div class="d-flex align-items-center">
+                <i class="fas fa-star text-warning me-1"></i>
+                <span class="fw-bold">4.8</span>
+              </div>
+            </div>
+
+            <p class="text-muted mb-2">
+              <i class="fas fa-map-marker-alt me-1"></i>
+              <%= listing.location %>, <%= listing.country %>
+            </p>
+
+            <p class="text-muted small mb-3">
+              <%= listing.description.substring(0, 100) %>...
+            </p>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="text-dark fw-bold mb-0">
+                  ₹<%= listing.price.toLocaleString("en-IN") %>
+                  <span class="fw-normal text-muted">night</span>
+                </h5>
+              </div>
+              <a
+                href="/listings/<%= listing._id %>"
+                class="btn btn-outline-dark rounded-pill">
+                View Details
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="text-center mt-5">
+      <button class="btn btn-airbnb px-5 py-3">
+        <i class="fas fa-spinner me-2"></i> Load More Listings
+      </button>
+    </div>
+
+    <% } else { %>
+    <!-- Empty State -->
+    <div class="text-center py-5">
+      <div class="mb-4">
+        <i class="fas fa-home fa-4x text-muted mb-3"></i>
+        <h3 class="fw-bold">No listings yet</h3>
+        <p class="text-muted">Be the first to create an amazing listing!</p>
+      </div>
+      <a href="/listings/new" class="btn btn-airbnb px-5">
+        <i class="fas fa-plus me-2"></i> Create First Listing
+      </a>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<style>
+  .card-img-top {
+    transition: transform 0.5s ease;
+  }
+
+  .card:hover .card-img-top {
+    transform: scale(1.05);
+  }
+
+  .badge {
+    border-radius: 6px;
+    font-size: 0.8rem;
+  }
+
+  .btn-outline-dark {
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline-dark:hover {
+    border-color: #ff385c;
+    color: #ff385c;
+    background-color: transparent;
+  }
+</style>
+
+<script>
+  // Add to wishlist functionality
+  document.querySelectorAll(".fa-heart").forEach((icon) => {
+    icon.addEventListener("click", function (e) {
+      e.stopPropagation();
+      this.classList.toggle("far");
+      this.classList.toggle("fas");
+      this.classList.toggle("text-danger");
+    });
+  });
+</script>
+s

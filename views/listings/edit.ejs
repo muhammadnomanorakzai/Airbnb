@@ -1,131 +1,462 @@
 <% layout("/layout/boilerplate") -%>
-<body class="bg-light">
-  <div class="container my-5">
-    <div
-      class="card shadow-lg border-0 rounded-4 mx-auto p-4"
-      style="max-width: 600px">
-      <h2 class="text-center text-success fw-bold mb-4">Edit Your Listing</h2>
-      <form
-        method="POST"
-        action="/listings/<%= listings._id %>?_method=PUT"
-        class="needs-validation"
-        novalidate
-        enctype="multipart/form-data">
-        <!-- Title -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Title</label>
-          <input
-            type="text"
-            name="listing[title]"
-            value="<%= listings.title %>"
-            class="form-control rounded-3 shadow-sm"
-            placeholder="Enter your title"
-            required />
-        </div>
 
-        <!-- Description -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Description</label>
-          <textarea
-            name="listing[description]"
-            class="form-control rounded-3 shadow-sm"
-            rows="4"
-            required>
-<%= listings.description %></textarea
-          >
-          <div class="invalid-feedback">
-            Please provide a valid Description.
+<div class="container-fluid px-0">
+  <!-- Progress Bar -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <div class="flex-grow-1">
+          <div class="progress" style="height: 6px">
+            <div
+              class="progress-bar bg-airbnb-pink"
+              role="progressbar"
+              style="width: 75%"></div>
+          </div>
+          <div class="d-flex justify-content-between mt-2">
+            <span class="text-muted">1. Basics</span>
+            <span class="text-muted">2. Details</span>
+            <span class="text-airbnb-pink fw-bold">3. Edit</span>
+            <span class="text-muted">4. Preview</span>
           </div>
         </div>
-
-        <div class="mb-3">
-          <h3>This is Original Image</h3>
-          <img src="<%= originalImageUrl %>" />
-        </div>
-
-        <!-- Image URL -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">upload New Image</label>
-          <input
-            type="file"
-            name="listing[image]"
-            class="form-control rounded-3 shadow-sm"
-            required />
-          <div class="invalid-feedback">Please provide a valid Image URL.</div>
-        </div>
-
-        <!-- Price -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Price (PKR)</label>
-          <input
-            type="number"
-            name="listing[price]"
-            value="<%= listings.price %>"
-            class="form-control rounded-3 shadow-sm"
-            placeholder="Enter price"
-            min="0"
-            required />
-          <div class="invalid-feedback">Please provide a valid Price.</div>
-        </div>
-
-        <!-- Location -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Location</label>
-          <input
-            type="text"
-            name="listing[location]"
-            value="<%= listings.location %>"
-            class="form-control rounded-3 shadow-sm"
-            placeholder="Enter location"
-            required />
-          <div class="invalid-feedback">Please provide a valid city.</div>
-        </div>
-
-        <!-- Country -->
-        <div class="mb-4">
-          <label class="form-label fw-semibold">Country</label>
-          <input
-            type="text"
-            name="listing[country]"
-            value="<%= listings.country %>"
-            class="form-control rounded-3 shadow-sm"
-            placeholder="Enter country"
-            required />
-          <div class="invalid-feedback">Please provide a valid Country.</div>
-        </div>
-
-        <!-- Buttons -->
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="/listings" class="btn btn-outline-secondary px-4">
-            <i class="bi bi-arrow-left"></i> Back
-          </a>
-          <button class="btn btn-success px-5 fw-semibold">
-            <i class="bi bi-save"></i> Update
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 
-  <style>
-    /* Form card subtle animation */
-    .card {
-      transition: all 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    }
+  <div class="container py-5">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-3 mb-4">
+        <div class="card border-0 shadow-sm sticky-top" style="top: 100px">
+          <div class="card-body">
+            <h6 class="fw-bold mb-3">Editing: <%= listings.title %></h6>
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2">
+                <a class="nav-link text-dark" href="#basic-info">
+                  <i class="fas fa-info-circle me-2"></i> Basic Info
+                </a>
+              </li>
+              <li class="nav-item mb-2">
+                <a class="nav-link text-dark" href="#photos">
+                  <i class="fas fa-images me-2"></i> Photos
+                </a>
+              </li>
+              <li class="nav-item mb-2">
+                <a class="nav-link text-dark" href="#location">
+                  <i class="fas fa-map-marker-alt me-2"></i> Location
+                </a>
+              </li>
+              <li class="nav-item mb-2">
+                <a class="nav-link text-dark" href="#pricing">
+                  <i class="fas fa-tag me-2"></i> Pricing
+                </a>
+              </li>
+              <li class="nav-item mb-2">
+                <a class="nav-link text-dark" href="#amenities">
+                  <i class="fas fa-star me-2"></i> Amenities
+                </a>
+              </li>
+            </ul>
 
-    /* Focus effect for inputs */
-    .form-control:focus {
-      border-color: #198754;
-      box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
-    }
+            <div class="mt-4 pt-3 border-top">
+              <a
+                href="/listings/<%= listings._id %>"
+                class="btn btn-outline-dark w-100 mb-2">
+                <i class="fas fa-eye me-2"></i> Preview
+              </a>
+              <a href="/listings" class="btn btn-outline-secondary w-100">
+                <i class="fas fa-times me-2"></i> Cancel
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    button:hover {
-      transform: scale(1.05);
-      transition: 0.2s ease;
-    }
-  </style>
-</body>
+      <!-- Main Form -->
+      <div class="col-lg-9">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-5">
+            <!-- Header -->
+            <div class="text-center mb-5">
+              <h1 class="display-6 fw-bold mb-3">Edit Your Listing</h1>
+              <p class="text-muted">
+                Update your listing details to attract more guests
+              </p>
+            </div>
+
+            <form
+              method="POST"
+              action="/listings/<%= listings._id %>?_method=PUT"
+              class="needs-validation"
+              novalidate
+              enctype="multipart/form-data">
+              <!-- Basic Info Section -->
+              <section id="basic-info" class="mb-5">
+                <h4 class="fw-bold mb-4">
+                  <i class="fas fa-info-circle text-airbnb-pink me-2"></i>
+                  Basic Information
+                </h4>
+
+                <div class="mb-4">
+                  <label class="form-label fw-bold">Listing Title</label>
+                  <input
+                    type="text"
+                    name="listing[title]"
+                    value="<%= listings.title %>"
+                    class="form-control form-control-lg"
+                    required />
+                  <div class="form-text">Make it catchy and descriptive</div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label fw-bold">Description</label>
+                  <textarea
+                    name="listing[description]"
+                    class="form-control"
+                    rows="5"
+                    required>
+<%= listings.description %></textarea
+                  >
+                  <div class="form-text d-flex justify-content-between">
+                    <span>Tell guests what makes your place special</span>
+                    <span id="charCount"
+                      ><%= listings.description.length %></span
+                    >/5000
+                  </div>
+                </div>
+              </section>
+
+              <!-- Photos Section -->
+              <section id="photos" class="mb-5">
+                <h4 class="fw-bold mb-4">
+                  <i class="fas fa-images text-airbnb-pink me-2"></i>
+                  Photos
+                </h4>
+
+                <div class="row mb-4">
+                  <div class="col-md-6">
+                    <div class="card border-0 shadow-sm">
+                      <div class="card-body text-center">
+                        <img
+                          src="<%= originalImageUrl %>"
+                          alt="Current image"
+                          class="img-fluid rounded mb-3"
+                          style="max-height: 200px" />
+                        <h6 class="fw-bold">Current Photo</h6>
+                        <p class="text-muted small">
+                          Your current listing photo
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                      <div class="card-body text-center">
+                        <i
+                          class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                        <h6 class="fw-bold">Upload New Photo</h6>
+                        <p class="text-muted small mb-3">
+                          Replace with a better image
+                        </p>
+
+                        <div class="input-group">
+                          <input
+                            type="file"
+                            name="listing[image]"
+                            class="form-control"
+                            accept="image/*" />
+                          <button class="btn btn-outline-dark" type="button">
+                            <i class="fas fa-upload"></i>
+                          </button>
+                        </div>
+
+                        <div class="form-text mt-3">
+                          <i class="fas fa-lightbulb me-1"></i>
+                          High-quality photos get 40% more bookings
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Location Section -->
+              <section id="location" class="mb-5">
+                <h4 class="fw-bold mb-4">
+                  <i class="fas fa-map-marker-alt text-airbnb-pink me-2"></i>
+                  Location
+                </h4>
+
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label fw-bold">City/Neighborhood</label>
+                    <input
+                      type="text"
+                      name="listing[location]"
+                      value="<%= listings.location %>"
+                      class="form-control"
+                      placeholder="e.g., South Beach, Miami"
+                      required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-bold">Country</label>
+                    <input
+                      type="text"
+                      name="listing[country]"
+                      value="<%= listings.country %>"
+                      class="form-control"
+                      placeholder="e.g., United States"
+                      required />
+                  </div>
+                </div>
+
+                <!-- Map Preview -->
+                <div class="mt-4">
+                  <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="fw-bold mb-0">Location Preview</h6>
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-dark">
+                          <i class="fas fa-map-marked-alt me-1"></i> Update Map
+                        </button>
+                      </div>
+                      <div class="bg-light rounded-3 p-4 text-center">
+                        <i
+                          class="fas fa-map-pin fa-2x text-airbnb-pink mb-3"></i>
+                        <p class="mb-0">
+                          <%= listings.location %>, <%= listings.country %>
+                        </p>
+                        <small class="text-muted"
+                          >This is how guests will see your location</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Pricing Section -->
+              <section id="pricing" class="mb-5">
+                <h4 class="fw-bold mb-4">
+                  <i class="fas fa-tag text-airbnb-pink me-2"></i>
+                  Pricing
+                </h4>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <label class="form-label fw-bold"
+                      >Base Price (per night)</label
+                    >
+                    <div class="input-group input-group-lg mb-3">
+                      <span class="input-group-text bg-light fw-bold">₹</span>
+                      <input
+                        type="number"
+                        name="listing[price]"
+                        value="<%= listings.price %>"
+                        class="form-control"
+                        min="0"
+                        required />
+                      <span class="input-group-text bg-light">/ night</span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label fw-bold">Discounts</label>
+                    <div class="card border-0 bg-light">
+                      <div class="card-body">
+                        <div class="form-check mb-2">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="weeklyDiscount" />
+                          <label class="form-check-label" for="weeklyDiscount">
+                            Weekly discount (10%)
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="monthlyDiscount" />
+                          <label class="form-check-label" for="monthlyDiscount">
+                            Monthly discount (20%)
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Price Calculator -->
+                <div class="card border-0 shadow-sm mt-4">
+                  <div class="card-body">
+                    <h6 class="fw-bold mb-3">Estimated Earnings</h6>
+                    <div class="table-responsive">
+                      <table class="table table-borderless">
+                        <tr>
+                          <td class="text-muted">Per night</td>
+                          <td class="text-end fw-bold">
+                            ₹<%= listings.price %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-muted">Weekly (7 nights)</td>
+                          <td class="text-end fw-bold">
+                            ₹<%= listings.price * 7 %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-muted">Monthly (30 nights)</td>
+                          <td class="text-end fw-bold">
+                            ₹<%= listings.price * 30 %>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Action Buttons -->
+              <div class="border-top pt-5 mt-5">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <a
+                      href="/listings/<%= listings._id %>"
+                      class="btn btn-outline-dark px-4">
+                      <i class="fas fa-times me-2"></i> Discard Changes
+                    </a>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark px-4"
+                      onclick="previewChanges()">
+                      <i class="fas fa-eye me-2"></i> Preview
+                    </button>
+                    <button type="submit" class="btn btn-airbnb px-5">
+                      <i class="fas fa-save me-2"></i> Save Changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Performance Stats -->
+        <div class="card border-0 shadow-sm mt-4">
+          <div class="card-body">
+            <h6 class="fw-bold mb-3">Listing Performance</h6>
+            <div class="row text-center">
+              <div class="col-md-3 mb-3">
+                <div class="display-6 fw-bold text-airbnb-pink">4.8</div>
+                <small class="text-muted">Average Rating</small>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="display-6 fw-bold text-airbnb-pink">124</div>
+                <small class="text-muted">Total Reviews</small>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="display-6 fw-bold text-airbnb-pink">78%</div>
+                <small class="text-muted">Booking Rate</small>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="display-6 fw-bold text-airbnb-pink">
+                  ₹<%= (listings.price * 30).toLocaleString("en-IN") %>
+                </div>
+                <small class="text-muted">Monthly Potential</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sticky-top {
+    position: sticky;
+    z-index: 100;
+  }
+
+  .bg-airbnb-pink {
+    background-color: #ff385c;
+  }
+
+  .text-airbnb-pink {
+    color: #ff385c;
+  }
+
+  .nav-link {
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link:hover {
+    background-color: #f8f9fa;
+    color: #ff385c !important;
+  }
+
+  .nav-link.active {
+    background-color: #ff385c;
+    color: white !important;
+  }
+
+  .form-control-lg {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .form-control:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 0 0.25rem rgba(255, 56, 92, 0.25);
+  }
+</style>
+
+<script>
+  // Character counter for description
+  const textarea = document.querySelector(
+    'textarea[name="listing[description]"]'
+  );
+  const charCounter = document.querySelector("#charCount");
+
+  if (textarea && charCounter) {
+    textarea.addEventListener("input", function () {
+      charCounter.textContent = this.value.length;
+    });
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      if (targetId === "#") return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 100,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
+  // Preview changes function
+  function previewChanges() {
+    const form = document.querySelector("form");
+    const formData = new FormData(form);
+
+    // You can implement AJAX preview here
+    alert(
+      "Preview functionality would show your updated listing. In a real application, this would use AJAX to preview changes."
+    );
+  }
+</script>

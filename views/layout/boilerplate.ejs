@@ -3,24 +3,200 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WanderLust</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <title>WanderLust | Find Unique Stays</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Airbnb+Cereal:wght@400;500;700&display=swap"
+      rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet" />
+
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Airbnb-like Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+
+    <style>
+      :root {
+        --airbnb-pink: #ff385c;
+        --airbnb-dark: #222222;
+        --airbnb-light: #717171;
+        --airbnb-bg: #f7f7f7;
+        --airbnb-success: #00a699;
+        --airbnb-purple: #914669;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--airbnb-bg);
+        color: var(--airbnb-dark);
+        padding-top: 80px;
+      }
+
+      .navbar-brand {
+        font-family: "Airbnb Cereal", sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--airbnb-pink) !important;
+      }
+
+      .nav-link {
+        font-weight: 500;
+        color: var(--airbnb-dark) !important;
+        padding: 8px 16px !important;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: #f0f0f0;
+        color: var(--airbnb-pink) !important;
+      }
+
+      .nav-link.active {
+        background-color: var(--airbnb-pink) !important;
+        color: white !important;
+      }
+
+      .btn-airbnb {
+        background-color: var(--airbnb-pink);
+        color: white;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 10px 24px;
+        border: none;
+      }
+
+      .btn-airbnb:hover {
+        background-color: #e31c5f;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 56, 92, 0.3);
+      }
+
+      .card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
+      }
+
+      footer {
+        margin-top: 80px;
+        border-top: 1px solid #ddd;
+      }
+    </style>
   </head>
 
   <body>
+    <!-- Navigation -->
     <%- include("../include/navbar.ejs") %>
 
-    <div class="container">
-      <%- include("../include/flash.ejs") %> <%- body %>
-    </div>
+    <!-- Flash Messages -->
+    <%- include("../include/flash.ejs") %>
 
+    <!-- Main Content -->
+    <main class="container-fluid px-0"><%- body %></main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-5 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold mb-3">
+              <i class="fa-regular fa-compass text-airbnb-pink"></i> WanderLust
+            </h5>
+            <p class="text-muted">
+              Find unique homes and experiences around the world.
+            </p>
+          </div>
+          <div class="col-md-2 mb-4">
+            <h6 class="fw-bold mb-3">Discover</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="text-decoration-none text-muted"
+                  >Trust & Safety</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-muted"
+                  >Travel Credit</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-muted"
+                  >Airbnb Citizen</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2 mb-4">
+            <h6 class="fw-bold mb-3">Hosting</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a href="/listings/new" class="text-decoration-none text-muted"
+                  >Host your home</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-muted"
+                  >Responsible hosting</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-muted"
+                  >Resource Center</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h6 class="fw-bold mb-3">Follow Us</h6>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-decoration-none text-muted"
+                ><i class="fab fa-facebook fa-lg"></i
+              ></a>
+              <a href="#" class="text-decoration-none text-muted"
+                ><i class="fab fa-twitter fa-lg"></i
+              ></a>
+              <a href="#" class="text-decoration-none text-muted"
+                ><i class="fab fa-instagram fa-lg"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="text-center text-muted">
+          <small>© 2024 WanderLust, Inc. All rights reserved</small>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
     <script src="/js/FormValidation.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

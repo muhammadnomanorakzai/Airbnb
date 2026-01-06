@@ -1,140 +1,413 @@
 <% layout("/layout/boilerplate") -%>
-<body class="bg-light">
-  <div class="container my-5">
-    <!-- Listing Card -->
-    <div
-      class="card shadow border-0 rounded-4 mx-auto"
-      style="max-width: 650px">
-      <img
-        src="<%= listings.image.url %>"
-        alt="<%= listings.title %>"
-        class="card-img-top rounded-top-4"
-        style="height: 300px; object-fit: cover" />
-      <div class="card-body p-4">
-        <p class="card-text">Owned By: <i><%= listings.owner.username %></i></p>
-        <h2 class="card-title text-success fw-bold mb-3">
-          <%= listings.title %>
-        </h2>
 
-        <p class="text-muted mb-2">
-          <i class="bi bi-geo-alt-fill text-danger"></i>
-          <%= listings.location %>, <%= listings.country %>
-        </p>
-
-        <p class="mb-3"><%= listings.description %></p>
-
-        <h4 class="text-success fw-semibold mb-4">
-          Rs <%= listings.price %> / night
-        </h4>
-        <% if(currUser && listings.owner._id.equals(currUser._id)) { %>
-        <div class="d-flex justify-content-between align-items-center">
-          <a
-            href="/listings/<%= listings._id %>/edit"
-            class="btn btn-outline-primary px-4">
-            <i class="bi bi-pencil-square"></i> Edit
-          </a>
-
-          <form
-            method="POST"
-            action="/listings/<%= listings._id %>?_method=DELETE"
-            onsubmit="return confirm('Are you sure you want to delete this listing?');">
-            <button class="btn btn-outline-danger px-4">
-              <i class="bi bi-trash"></i> Delete
-            </button>
-          </form>
-        </div>
-        <% } %>
+<div class="container-fluid px-0">
+  <!-- Image Gallery -->
+  <div class="container-fluid px-0">
+    <div class="row g-0">
+      <!-- Main Image -->
+      <div class="col-lg-7">
+        <img
+          src="<%= listings.image.url %>"
+          alt="<%= listings.title %>"
+          class="w-100"
+          style="height: 70vh; object-fit: cover" />
       </div>
-    </div>
 
-    <!-- Review Form (Simple & Professional) -->
-    <div class="mt-5 mx-auto" style="max-width: 650px">
-      <% if(currUser) { %>
-      <h3 class="fw-bold mb-3 text-primary">Write a Review</h3>
-
-      <form
-        method="POST"
-        action="/listings/<%= listings._id %>/reviews"
-        class="p-4 bg-white shadow-sm rounded-4 border needs-validation"
-        novalidate>
-        <!-- Rating -->
-        <div class="mb-3">
-          <label for="rating" class="form-label w-100">Rating</label>
-          <input
-            type="range"
-            id="rating"
-            min="1"
-            max="5"
-            step="1"
-            name="review[rating]"
-            class="form-range rating-slider" />
-        </div>
-
-        <!-- Comment -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold mb-2">Comment</label>
-          <textarea
-            name="review[comment]"
-            rows="4"
-            class="form-control mb-4"
-            placeholder="Write your review here..."
-            required></textarea>
-          <div class="invalid-feedback">
-            please Submit some comments for review
+      <!-- Side Images -->
+      <div class="col-lg-5">
+        <div class="row g-0 h-100">
+          <div class="col-6">
+            <img
+              src="https://images.unsplash.com/photo-1613977257363-707ba9348227"
+              class="w-100 h-50"
+              style="object-fit: cover" />
+            <img
+              src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224"
+              class="w-100 h-50"
+              style="object-fit: cover" />
           </div>
-        </div>
-        <div class="mb-3">
-          <!-- Submit -->
-          <button class="btn btn-success px-4 py-2">Submit Review</button>
-        </div>
-      </form>
-      <% } %>
-      <hr />
-      <h4 class="mb-4">All Reviews</h4>
-
-      <div class="row g-3">
-        <% for (let review of listings.reviews) { %>
-        <div class="col-md-6">
-          <div class="card p-3 shadow-sm rounded-4 border">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <h5 class="card-title"><%= review.author.username %></p>
-              <span class="fw-semibold">Rating:</span>
-              <span class="text-warning">
-                <% for (let i = 0; i < review.rating; i++) { %> ★ <% } %> <% for
-                (let i = review.rating; i < 5; i++) { %> ☆ <% } %>
-              </span>
+          <div class="col-6">
+            <img
+              src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4"
+              class="w-100 h-50"
+              style="object-fit: cover" />
+            <img
+              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750"
+              class="w-100 h-50"
+              style="object-fit: cover" />
+            <div class="position-relative">
+              <button
+                class="btn btn-light position-absolute bottom-0 end-0 m-3 rounded-pill">
+                <i class="fas fa-images me-2"></i> Show all photos
+              </button>
             </div>
-            <p class="mb-2"><%= review.comment %></p>
-            <small class="text-muted">
-              Reviewed on <%= new Date(review.createdAt).toLocaleDateString() %>
-            </small>
-            <form
-              method="POST"
-              action="/listings/<%= listings._id %>/reviews/<%=review._id %>?_method=DELETE">
-              <button class="btn btn-sm btn-success">Delete</button>
-            </form>
           </div>
         </div>
-        <% } %>
       </div>
     </div>
   </div>
 
-  <style>
-    .btn {
-      transition: all 0.3s ease;
-    }
-    .btn:hover {
-      transform: scale(1.05);
-    }
-    .card:hover {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      transform: translateY(-3px);
-      transition: all 0.3s ease;
-    }
-    .rating-slider {
-      width: 100%; /* Full width */
-      accent-color: #198754; /* Bootstrap success color (green) */
-    }
-  </style>
-</body>
+  <!-- Main Content -->
+  <div class="container py-5">
+    <div class="row">
+      <!-- Left Column - Details -->
+      <div class="col-lg-7">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-start mb-4">
+          <div>
+            <h1 class="fw-bold mb-2"><%= listings.title %></h1>
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-star text-warning me-1"></i>
+                <span class="fw-bold">4.8</span>
+                <span class="text-muted ms-1">(124 reviews)</span>
+              </div>
+              <span class="text-muted">
+                <i class="fas fa-map-marker-alt me-1"></i>
+                <%= listings.location %>, <%= listings.country %>
+              </span>
+              <span class="badge bg-success">
+                <i class="fas fa-crown me-1"></i> Superhost
+              </span>
+            </div>
+          </div>
+
+          <!-- Share & Save -->
+          <div class="d-flex gap-2">
+            <button
+              class="btn btn-outline-dark rounded-circle"
+              style="width: 40px; height: 40px">
+              <i class="fas fa-share"></i>
+            </button>
+            <button
+              class="btn btn-outline-dark rounded-circle"
+              style="width: 40px; height: 40px">
+              <i class="far fa-heart"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Host Info -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                class="rounded-circle me-3"
+                width="64"
+                height="64" />
+              <div class="flex-grow-1">
+                <h5 class="fw-bold mb-1">
+                  Hosted by <%= listings.owner.username %>
+                </h5>
+                <p class="text-muted mb-2">Superhost • 5 years hosting</p>
+                <div class="d-flex gap-2">
+                  <span class="badge bg-light text-dark">
+                    <i class="fas fa-medal text-warning me-1"></i> Identity
+                    verified
+                  </span>
+                  <span class="badge bg-light text-dark">
+                    <i class="fas fa-check-circle text-success me-1"></i> Fast
+                    response
+                  </span>
+                </div>
+              </div>
+              <button class="btn btn-outline-dark">Contact Host</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="row g-4 mb-4">
+          <div class="col-md-4">
+            <div class="text-center p-3">
+              <i class="fas fa-home fa-2x text-airbnb-pink mb-3"></i>
+              <h6 class="fw-bold">Entire home</h6>
+              <p class="text-muted small">You'll have the place to yourself</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-center p-3">
+              <i class="fas fa-broom fa-2x text-airbnb-pink mb-3"></i>
+              <h6 class="fw-bold">Enhanced Clean</h6>
+              <p class="text-muted small">
+                This host committed to rigorous cleaning protocol
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-center p-3">
+              <i class="fas fa-key fa-2x text-airbnb-pink mb-3"></i>
+              <h6 class="fw-bold">Self check-in</h6>
+              <p class="text-muted small">Check yourself in with the keypad</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-5">
+          <h4 class="fw-bold mb-3">About this space</h4>
+          <p class="lead"><%= listings.description %></p>
+
+          <div class="mt-4">
+            <a href="#" class="text-decoration-none text-airbnb-pink fw-bold">
+              Show more <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Amenities -->
+        <div class="mb-5">
+          <h4 class="fw-bold mb-4">What this place offers</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-wifi text-success me-3 fa-lg"></i>
+                <span>High-speed WiFi</span>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-kitchen-set text-success me-3 fa-lg"></i>
+                <span>Kitchen</span>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-car text-success me-3 fa-lg"></i>
+                <span>Free parking</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-tv text-success me-3 fa-lg"></i>
+                <span>HDTV</span>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i
+                  class="fas fa-temperature-arrow-up text-success me-3 fa-lg"></i>
+                <span>Heating</span>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-umbrella-beach text-success me-3 fa-lg"></i>
+                <span>Beach access</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="mb-5">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0">
+              <i class="fas fa-star text-warning me-2"></i>
+              4.8 • 124 reviews
+            </h4>
+            <button class="btn btn-outline-dark">See all reviews</button>
+          </div>
+
+          <!-- Review Cards -->
+          <div class="row g-4">
+            <% for (let review of listings.reviews.slice(0, 4)) { %>
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-3">
+                    <img
+                      src="https://randomuser.me/api/portraits/women/<%= Math.floor(Math.random() * 90) + 1 %>.jpg"
+                      class="rounded-circle me-3"
+                      width="48"
+                      height="48" />
+                    <div>
+                      <h6 class="fw-bold mb-0">
+                        <%= review.author.username %>
+                      </h6>
+                      <small class="text-muted"
+                        ><%= new
+                        Date(review.createdAt).toLocaleDateString('en-US', {
+                        month: 'long', year: 'numeric' }) %></small
+                      >
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <span class="text-warning">
+                      <% for (let i = 0; i < review.rating; i++) { %>
+                      <i class="fas fa-star"></i>
+                      <% } %> <% for (let i = review.rating; i < 5; i++) { %>
+                      <i class="far fa-star"></i>
+                      <% } %>
+                    </span>
+                  </div>
+
+                  <p class="mb-0"><%= review.comment %></p>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-5">
+          <h4 class="fw-bold mb-4">Where you'll be</h4>
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+              <!-- Replace with actual map -->
+              <div class="bg-light text-center py-5" style="height: 300px">
+                <i class="fas fa-map-marked-alt fa-3x text-muted mb-3"></i>
+                <p class="text-muted">
+                  Map of <%= listings.location %>, <%= listings.country %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Booking Card -->
+      <div class="col-lg-5">
+        <div class="sticky-top" style="top: 100px">
+          <!-- Booking Card -->
+          <div class="card border-0 shadow-lg mb-4">
+            <div class="card-body p-4">
+              <div
+                class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-bold mb-0">
+                  ₹<%= listings.price.toLocaleString("en-IN") %>
+                  <span class="fs-6 fw-normal text-muted">/ night</span>
+                </h3>
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-star text-warning me-1"></i>
+                  <span class="fw-bold">4.8</span>
+                  <span class="text-muted ms-1">(124)</span>
+                </div>
+              </div>
+
+              <!-- Date Picker -->
+              <div class="border rounded-3 p-3 mb-3">
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label class="form-label small fw-bold">CHECK-IN</label>
+                    <input
+                      type="date"
+                      class="form-control border-0"
+                      value="<%= new Date(Date.now() + 86400000).toISOString().split('T')[0] %>" />
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label small fw-bold">CHECKOUT</label>
+                    <input
+                      type="date"
+                      class="form-control border-0"
+                      value="<%= new Date(Date.now() + 172800000).toISOString().split('T')[0] %>" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Guest Selector -->
+              <div class="mb-4">
+                <label class="form-label fw-bold mb-2">Guests</label>
+                <select class="form-select">
+                  <option>1 guest</option>
+                  <option selected>2 guests</option>
+                  <option>3 guests</option>
+                  <option>4 guests</option>
+                  <option>5+ guests</option>
+                </select>
+              </div>
+
+              <!-- Price Breakdown -->
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="text-muted"
+                    >₹<%= listings.price %> x 3 nights</span
+                  >
+                  <span class="fw-bold">₹<%= listings.price * 3 %></span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="text-muted">Cleaning fee</span>
+                  <span class="fw-bold">₹800</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="text-muted">Service fee</span>
+                  <span class="fw-bold">₹1,200</span>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between">
+                  <span class="fw-bold">Total</span>
+                  <span class="fw-bold fs-5"
+                    >₹<%= listings.price * 3 + 2000 %></span
+                  >
+                </div>
+              </div>
+
+              <!-- Reserve Button -->
+              <button class="btn btn-airbnb w-100 py-3 fw-bold mb-3">
+                <i class="fas fa-calendar-check me-2"></i> Reserve
+              </button>
+
+              <!-- Protected Payment -->
+              <p class="text-center text-muted small">
+                <i class="fas fa-shield-alt me-1"></i>
+                Your payment is protected by WanderLust
+              </p>
+
+              <!-- Report Listing -->
+              <div class="text-center mt-3">
+                <a href="#" class="text-decoration-none text-muted small">
+                  <i class="fas fa-flag me-1"></i> Report this listing
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Owner Actions -->
+          <% if(currUser && listings.owner._id.equals(currUser._id)) { %>
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3">Manage your listing</h6>
+              <div class="d-grid gap-2">
+                <a
+                  href="/listings/<%= listings._id %>/edit"
+                  class="btn btn-outline-primary">
+                  <i class="fas fa-edit me-2"></i> Edit Listing
+                </a>
+                <form
+                  method="POST"
+                  action="/listings/<%= listings._id %>?_method=DELETE"
+                  onsubmit="return confirm('Are you sure you want to delete this listing? This action cannot be undone.');">
+                  <button class="btn btn-outline-danger w-100">
+                    <i class="fas fa-trash me-2"></i> Delete Listing
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sticky-top {
+    position: sticky;
+    z-index: 100;
+  }
+
+  .text-airbnb-pink {
+    color: #ff385c;
+  }
+
+  .form-control:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 0 0.25rem rgba(255, 56, 92, 0.25);
+  }
+
+  .btn-airbnb {
+    background-color: #ff385c;
+    border: none;
+    color: white;
+  }
+
+  .btn-airbnb:hover {
+    background-color: #e31c5f;
+  }
+</style>

@@ -1,30 +1,96 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i> </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+  <div class="container-fluid px-4">
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="/listings">
+      <i class="fa-regular fa-compass fa-2x me-2"></i>
+      <span class="fw-bold" style="color: #ff385c">WanderLust</span>
+    </a>
+
+    <!-- Mobile Toggle -->
     <button
-      class="navbar-toggler"
+      class="navbar-toggler border-0"
       type="button"
       data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
+      data-bs-target="#navbarNav"
       aria-expanded="false"
       aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/"> Home </a>
-        <a class="nav-link" href="/listings"> listings </a>
-        <a class="nav-link" href="/listings/new"> New Listings </a>
-      </div>
-      <div class="navbar-nav ms-auto">
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Main Navigation -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/listings">
+            <i class="fas fa-home me-1"></i> Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">
+            <i class="fas fa-list me-1"></i> Explore
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn-airbnb text-white" href="/listings/new">
+            <i class="fas fa-plus me-1"></i> Become a Host
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Actions -->
+      <div class="d-flex align-items-center">
         <% if(!currUser) { %>
-        <a class="nav-link active" aria-current="page" href="/signup">
-          sign up
+        <a class="btn btn-outline-dark rounded-pill me-2" href="/login">
+          <i class="fas fa-sign-in-alt me-1"></i> Log in
         </a>
-        <a class="nav-link" href="/login"> login </a>
+        <a class="btn btn-airbnb rounded-pill" href="/signup">
+          <i class="fas fa-user-plus me-1"></i> Sign up
+        </a>
         <% } %> <% if(currUser) { %>
-        <a class="nav-link" href="/logout">logout</a>
+        <!-- User Dropdown -->
+        <div class="dropdown">
+          <button
+            class="btn btn-light rounded-pill dropdown-toggle d-flex align-items-center"
+            type="button"
+            id="userDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="fas fa-bars me-2"></i>
+            <i class="fas fa-user-circle fa-lg text-muted"></i>
+          </button>
+          <ul
+            class="dropdown-menu dropdown-menu-end shadow"
+            aria-labelledby="userDropdown">
+            <li>
+              <a class="dropdown-item" href="#"
+                ><i class="fas fa-user me-2"></i>Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="#"
+                ><i class="fas fa-heart me-2"></i>Wishlists</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="/listings/new"
+                ><i class="fas fa-plus-circle me-2"></i>Host your home</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="#"
+                ><i class="fas fa-cog me-2"></i>Account settings</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item text-danger" href="/logout"
+                ><i class="fas fa-sign-out-alt me-2"></i>Log out</a
+              >
+            </li>
+          </ul>
+        </div>
         <% } %>
       </div>
     </div>
