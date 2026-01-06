@@ -19,6 +19,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+const PORT = process.env.PORT || 8080;
 
 // ========================================
 //  STEP 2: ROUTES
@@ -103,7 +104,6 @@ app.get("/", (req, res) => {
 // ========================================
 //  STEP 10: SERVER (ENV PORT)
 // ========================================
-const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
