@@ -5,41 +5,69 @@
   <div class="container-fluid px-0">
     <div class="row g-0">
       <!-- Main Image -->
-      <div class="col-lg-7">
+      <div class="col-lg-8 position-relative">
         <img
           src="<%= listings.image.url %>"
           alt="<%= listings.title %>"
           class="w-100"
-          style="height: 70vh; object-fit: cover" />
+          style="height: 65vh; object-fit: cover" />
+        <!-- Image Counter -->
+        <div class="position-absolute bottom-0 end-0 m-4">
+          <button class="btn btn-light rounded-pill px-4 py-2">
+            <i class="fas fa-images me-2"></i> View all photos
+          </button>
+        </div>
       </div>
 
       <!-- Side Images -->
-      <div class="col-lg-5">
+      <div class="col-lg-4">
         <div class="row g-0 h-100">
           <div class="col-6">
-            <img
-              src="https://images.unsplash.com/photo-1613977257363-707ba9348227"
-              class="w-100 h-50"
-              style="object-fit: cover" />
-            <img
-              src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224"
-              class="w-100 h-50"
-              style="object-fit: cover" />
+            <div class="h-50 position-relative">
+              <img
+                src="https://images.unsplash.com/photo-1613977257363-707ba9348227"
+                class="w-100 h-100"
+                style="object-fit: cover" />
+              <div class="position-absolute top-0 end-0 m-2">
+                <button class="btn btn-light rounded-circle btn-sm">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+            <div class="h-50 position-relative">
+              <img
+                src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224"
+                class="w-100 h-100"
+                style="object-fit: cover" />
+              <div class="position-absolute top-0 end-0 m-2">
+                <button class="btn btn-light rounded-circle btn-sm">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
           </div>
           <div class="col-6">
-            <img
-              src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4"
-              class="w-100 h-50"
-              style="object-fit: cover" />
-            <img
-              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750"
-              class="w-100 h-50"
-              style="object-fit: cover" />
-            <div class="position-relative">
-              <button
-                class="btn btn-light position-absolute bottom-0 end-0 m-3 rounded-pill">
-                <i class="fas fa-images me-2"></i> Show all photos
-              </button>
+            <div class="h-50 position-relative">
+              <img
+                src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4"
+                class="w-100 h-100"
+                style="object-fit: cover" />
+              <div class="position-absolute top-0 end-0 m-2">
+                <button class="btn btn-light rounded-circle btn-sm">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+            <div class="h-50 position-relative">
+              <img
+                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750"
+                class="w-100 h-100"
+                style="object-fit: cover" />
+              <div class="position-absolute top-0 end-0 m-2">
+                <button class="btn btn-light rounded-circle btn-sm">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -51,19 +79,21 @@
   <div class="container py-5">
     <div class="row">
       <!-- Left Column - Details -->
-      <div class="col-lg-7">
+      <div class="col-lg-8">
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-start mb-4">
           <div>
-            <h1 class="fw-bold mb-2"><%= listings.title %></h1>
-            <div class="d-flex align-items-center gap-3 mb-3">
+            <h1 class="display-6 fw-bold mb-2 text-airbnb-dark">
+              <%= listings.title %>
+            </h1>
+            <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
               <div class="d-flex align-items-center">
                 <i class="fas fa-star text-warning me-1"></i>
                 <span class="fw-bold">4.8</span>
                 <span class="text-muted ms-1">(124 reviews)</span>
               </div>
               <span class="text-muted">
-                <i class="fas fa-map-marker-alt me-1"></i>
+                <i class="fas fa-map-marker-alt text-airbnb-pink me-1"></i>
                 <%= listings.location %>, <%= listings.country %>
               </span>
               <span class="badge bg-success">
@@ -76,12 +106,16 @@
           <div class="d-flex gap-2">
             <button
               class="btn btn-outline-dark rounded-circle"
-              style="width: 40px; height: 40px">
+              style="width: 44px; height: 44px"
+              data-bs-toggle="tooltip"
+              title="Share">
               <i class="fas fa-share"></i>
             </button>
             <button
               class="btn btn-outline-dark rounded-circle"
-              style="width: 40px; height: 40px">
+              style="width: 44px; height: 44px"
+              data-bs-toggle="tooltip"
+              title="Save to wishlist">
               <i class="far fa-heart"></i>
             </button>
           </div>
@@ -91,24 +125,32 @@
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
             <div class="d-flex align-items-center">
-              <img
-                src="https://randomuser.me/api/portraits/men/32.jpg"
-                class="rounded-circle me-3"
-                width="64"
-                height="64" />
+              <div class="position-relative">
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  class="rounded-circle me-3"
+                  width="70"
+                  height="70" />
+                <span class="position-absolute bottom-0 end-0">
+                  <i
+                    class="fas fa-check-circle text-success bg-white rounded-circle"></i>
+                </span>
+              </div>
               <div class="flex-grow-1">
                 <h5 class="fw-bold mb-1">
                   Hosted by <%= listings.owner.username %>
                 </h5>
                 <p class="text-muted mb-2">Superhost • 5 years hosting</p>
-                <div class="d-flex gap-2">
+                <div class="d-flex gap-2 flex-wrap">
                   <span class="badge bg-light text-dark">
                     <i class="fas fa-medal text-warning me-1"></i> Identity
                     verified
                   </span>
                   <span class="badge bg-light text-dark">
-                    <i class="fas fa-check-circle text-success me-1"></i> Fast
-                    response
+                    <i class="fas fa-bolt text-success me-1"></i> Fast response
+                  </span>
+                  <span class="badge bg-light text-dark">
+                    <i class="fas fa-star text-primary me-1"></i> 4.8 rating
                   </span>
                 </div>
               </div>
@@ -118,75 +160,140 @@
         </div>
 
         <!-- Highlights -->
-        <div class="row g-4 mb-4">
+        <div class="row g-3 mb-5">
           <div class="col-md-4">
-            <div class="text-center p-3">
-              <i class="fas fa-home fa-2x text-airbnb-pink mb-3"></i>
-              <h6 class="fw-bold">Entire home</h6>
-              <p class="text-muted small">You'll have the place to yourself</p>
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div
+                  class="bg-airbnb-pink bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+                  <i class="fas fa-home fa-lg text-airbnb-pink"></i>
+                </div>
+                <h6 class="fw-bold mb-2">Entire home</h6>
+                <p class="text-muted small mb-0">
+                  You'll have the place to yourself
+                </p>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="text-center p-3">
-              <i class="fas fa-broom fa-2x text-airbnb-pink mb-3"></i>
-              <h6 class="fw-bold">Enhanced Clean</h6>
-              <p class="text-muted small">
-                This host committed to rigorous cleaning protocol
-              </p>
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div
+                  class="bg-airbnb-pink bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+                  <i class="fas fa-broom fa-lg text-airbnb-pink"></i>
+                </div>
+                <h6 class="fw-bold mb-2">Enhanced Clean</h6>
+                <p class="text-muted small mb-0">
+                  This host committed to rigorous cleaning protocol
+                </p>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="text-center p-3">
-              <i class="fas fa-key fa-2x text-airbnb-pink mb-3"></i>
-              <h6 class="fw-bold">Self check-in</h6>
-              <p class="text-muted small">Check yourself in with the keypad</p>
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div
+                  class="bg-airbnb-pink bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+                  <i class="fas fa-key fa-lg text-airbnb-pink"></i>
+                </div>
+                <h6 class="fw-bold mb-2">Self check-in</h6>
+                <p class="text-muted small mb-0">
+                  Check yourself in with the keypad
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Description -->
         <div class="mb-5">
-          <h4 class="fw-bold mb-3">About this space</h4>
-          <p class="lead"><%= listings.description %></p>
+          <h3 class="fw-bold mb-4 text-airbnb-dark">About this space</h3>
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <p class="lead mb-0"><%= listings.description %></p>
+            </div>
+          </div>
 
           <div class="mt-4">
-            <a href="#" class="text-decoration-none text-airbnb-pink fw-bold">
-              Show more <i class="fas fa-chevron-right"></i>
+            <a
+              href="#"
+              class="text-decoration-none text-airbnb-pink fw-bold d-flex align-items-center">
+              Show more <i class="fas fa-chevron-right ms-2"></i>
             </a>
           </div>
         </div>
 
         <!-- Amenities -->
         <div class="mb-5">
-          <h4 class="fw-bold mb-4">What this place offers</h4>
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold mb-0 text-airbnb-dark">
+              What this place offers
+            </h3>
+            <button class="btn btn-outline-dark">Show all amenities</button>
+          </div>
           <div class="row">
             <div class="col-md-6">
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-wifi text-success me-3 fa-lg"></i>
-                <span>High-speed WiFi</span>
+              <div class="d-flex align-items-center mb-4">
+                <div class="bg-light rounded-circle p-2 me-3">
+                  <i class="fas fa-wifi fa-lg text-success"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">High-speed WiFi</h6>
+                  <p class="text-muted small mb-0">
+                    Fast and reliable internet connection
+                  </p>
+                </div>
               </div>
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-kitchen-set text-success me-3 fa-lg"></i>
-                <span>Kitchen</span>
+              <div class="d-flex align-items-center mb-4">
+                <div class="bg-light rounded-circle p-2 me-3">
+                  <i class="fas fa-kitchen-set fa-lg text-success"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">Fully equipped kitchen</h6>
+                  <p class="text-muted small mb-0">
+                    Everything you need to cook
+                  </p>
+                </div>
               </div>
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-car text-success me-3 fa-lg"></i>
-                <span>Free parking</span>
+              <div class="d-flex align-items-center mb-4">
+                <div class="bg-light rounded-circle p-2 me-3">
+                  <i class="fas fa-car fa-lg text-success"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">Free parking</h6>
+                  <p class="text-muted small mb-0">
+                    Parking available on premises
+                  </p>
+                </div>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-tv text-success me-3 fa-lg"></i>
-                <span>HDTV</span>
+              <div class="d-flex align-items-center mb-4">
+                <div class="bg-light rounded-circle p-2 me-3">
+                  <i class="fas fa-tv fa-lg text-success"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">HDTV with Netflix</h6>
+                  <p class="text-muted small mb-0">Entertainment options</p>
+                </div>
               </div>
-              <div class="d-flex align-items-center mb-3">
-                <i
-                  class="fas fa-temperature-arrow-up text-success me-3 fa-lg"></i>
-                <span>Heating</span>
+              <div class="d-flex align-items-center mb-4">
+                <div class="bg-light rounded-circle p-2 me-3">
+                  <i class="fas fa-temperature-arrow-up fa-lg text-success"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">Heating & AC</h6>
+                  <p class="text-muted small mb-0">Climate control available</p>
+                </div>
               </div>
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-umbrella-beach text-success me-3 fa-lg"></i>
-                <span>Beach access</span>
+              <div class="d-flex align-items-center mb-4">
+                <div class="bg-light rounded-circle p-2 me-3">
+                  <i class="fas fa-umbrella-beach fa-lg text-success"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">Beach access</h6>
+                  <p class="text-muted small mb-0">Just steps from the beach</p>
+                </div>
               </div>
             </div>
           </div>
@@ -195,10 +302,13 @@
         <!-- Reviews Section -->
         <div class="mb-5">
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold mb-0">
-              <i class="fas fa-star text-warning me-2"></i>
-              4.8 • 124 reviews
-            </h4>
+            <div>
+              <h3 class="fw-bold mb-0 text-airbnb-dark">
+                <i class="fas fa-star text-warning me-2"></i>
+                4.8 • 124 reviews
+              </h3>
+              <p class="text-muted mb-0">What guests are saying</p>
+            </div>
             <button class="btn btn-outline-dark">See all reviews</button>
           </div>
 
@@ -246,30 +356,148 @@
 
         <!-- Location -->
         <div class="mb-5">
-          <h4 class="fw-bold mb-4">Where you'll be</h4>
-          <div class="card border-0 shadow-sm">
+          <h3 class="fw-bold mb-4 text-airbnb-dark">Where you'll be</h3>
+          <div class="card border-0 shadow-sm overflow-hidden">
             <div class="card-body p-0">
-              <!-- Replace with actual map -->
               <div class="bg-light text-center py-5" style="height: 300px">
                 <i class="fas fa-map-marked-alt fa-3x text-muted mb-3"></i>
+                <h5 class="fw-bold mb-2">
+                  <%= listings.location %>, <%= listings.country %>
+                </h5>
                 <p class="text-muted">
-                  Map of <%= listings.location %>, <%= listings.country %>
+                  Great location - 92% of recent guests gave 5 stars
+                </p>
+              </div>
+              <div class="p-4">
+                <h6 class="fw-bold mb-2">Getting around</h6>
+                <p class="text-muted mb-0">
+                  Walk Score®: 85 (Very Walkable) • Transit Score®: 70 (Good
+                  Transit)
                 </p>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Owner Actions -->
+        <% if(currUser && listings.owner._id.equals(currUser._id)) { %>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body">
+            <h4 class="fw-bold mb-4 text-airbnb-dark">Manage your listing</h4>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <a
+                  href="/listings/<%= listings._id %>/edit"
+                  class="btn btn-outline-airbnb w-100 py-3">
+                  <i class="fas fa-edit me-2"></i> Edit Listing
+                </a>
+              </div>
+              <div class="col-md-6">
+                <form
+                  method="POST"
+                  action="/listings/<%= listings._id %>?_method=DELETE"
+                  onsubmit="return confirm('Are you sure you want to delete this listing? This action cannot be undone.');">
+                  <button class="btn btn-outline-danger w-100 py-3">
+                    <i class="fas fa-trash me-2"></i> Delete Listing
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
+        <!-- Review Form -->
+        <div class="mt-5">
+          <% if(currUser) { %>
+          <div class="card border-0 shadow-lg">
+            <div class="card-header bg-white border-0 py-4">
+              <h3 class="fw-bold mb-0 text-airbnb-dark">
+                <i class="fas fa-pen text-airbnb-pink me-2"></i>
+                Write a Review
+              </h3>
+            </div>
+            <div class="card-body p-4">
+              <form
+                method="POST"
+                action="/listings/<%= listings._id %>/reviews"
+                class="needs-validation"
+                novalidate>
+                <!-- Rating -->
+                <div class="mb-4">
+                  <label class="form-label fw-bold mb-3">Your Rating</label>
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="rating-stars me-3">
+                      <% for (let i = 1; i <= 5; i++) { %>
+                      <i
+                        class="far fa-star fa-2x rating-star"
+                        data-value="<%= i %>"
+                        style="cursor: pointer; margin-right: 5px"></i>
+                      <% } %>
+                    </div>
+                    <span class="fw-bold" id="ratingValue">0</span>/5
+                  </div>
+                  <input
+                    type="hidden"
+                    name="review[rating]"
+                    id="ratingInput"
+                    value="0"
+                    required />
+                </div>
+
+                <!-- Comment -->
+                <div class="mb-4">
+                  <label class="form-label fw-bold mb-3">Your Review</label>
+                  <textarea
+                    name="review[comment]"
+                    class="form-control form-control-lg"
+                    rows="4"
+                    placeholder="Share your experience... What did you love about this place? Any suggestions for improvement?"
+                    required></textarea>
+                  <div class="form-text mt-2">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Be honest and detailed. Your review helps other guests.
+                  </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="d-flex justify-content-end">
+                  <button
+                    type="submit"
+                    class="btn btn-airbnb px-5 py-3 fw-bold">
+                    <i class="fas fa-paper-plane me-2"></i> Submit Review
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <% } else { %>
+          <div class="card border-0 shadow-sm">
+            <div class="card-body text-center p-5">
+              <i class="fas fa-sign-in-alt fa-3x text-muted mb-3"></i>
+              <h4 class="fw-bold mb-3">Sign in to leave a review</h4>
+              <p class="text-muted mb-4">
+                Share your experience and help other travelers make better
+                decisions.
+              </p>
+              <a href="/login" class="btn btn-airbnb px-5">
+                <i class="fas fa-sign-in-alt me-2"></i> Sign In to Review
+              </a>
+            </div>
+          </div>
+          <% } %>
+        </div>
       </div>
 
       <!-- Right Column - Booking Card -->
-      <div class="col-lg-5">
+      <div class="col-lg-4">
         <div class="sticky-top" style="top: 100px">
           <!-- Booking Card -->
           <div class="card border-0 shadow-lg mb-4">
             <div class="card-body p-4">
               <div
                 class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="fw-bold mb-0">
+                <h3 class="fw-bold mb-0 text-airbnb-dark">
                   ₹<%= listings.price.toLocaleString("en-IN") %>
                   <span class="fs-6 fw-normal text-muted">/ night</span>
                 </h3>
@@ -287,14 +515,14 @@
                     <label class="form-label small fw-bold">CHECK-IN</label>
                     <input
                       type="date"
-                      class="form-control border-0"
+                      class="form-control border-0 bg-light"
                       value="<%= new Date(Date.now() + 86400000).toISOString().split('T')[0] %>" />
                   </div>
                   <div class="col-6">
                     <label class="form-label small fw-bold">CHECKOUT</label>
                     <input
                       type="date"
-                      class="form-control border-0"
+                      class="form-control border-0 bg-light"
                       value="<%= new Date(Date.now() + 172800000).toISOString().split('T')[0] %>" />
                   </div>
                 </div>
@@ -303,7 +531,7 @@
               <!-- Guest Selector -->
               <div class="mb-4">
                 <label class="form-label fw-bold mb-2">Guests</label>
-                <select class="form-select">
+                <select class="form-select form-select-lg">
                   <option>1 guest</option>
                   <option selected>2 guests</option>
                   <option>3 guests</option>
@@ -343,43 +571,25 @@
               </button>
 
               <!-- Protected Payment -->
-              <p class="text-center text-muted small">
+              <p class="text-center text-muted small mb-0">
                 <i class="fas fa-shield-alt me-1"></i>
                 Your payment is protected by WanderLust
               </p>
-
-              <!-- Report Listing -->
-              <div class="text-center mt-3">
-                <a href="#" class="text-decoration-none text-muted small">
-                  <i class="fas fa-flag me-1"></i> Report this listing
-                </a>
-              </div>
             </div>
           </div>
 
-          <!-- Owner Actions -->
-          <% if(currUser && listings.owner._id.equals(currUser._id)) { %>
+          <!-- Host Contact -->
           <div class="card border-0 shadow-sm">
             <div class="card-body">
-              <h6 class="fw-bold mb-3">Manage your listing</h6>
-              <div class="d-grid gap-2">
-                <a
-                  href="/listings/<%= listings._id %>/edit"
-                  class="btn btn-outline-primary">
-                  <i class="fas fa-edit me-2"></i> Edit Listing
-                </a>
-                <form
-                  method="POST"
-                  action="/listings/<%= listings._id %>?_method=DELETE"
-                  onsubmit="return confirm('Are you sure you want to delete this listing? This action cannot be undone.');">
-                  <button class="btn btn-outline-danger w-100">
-                    <i class="fas fa-trash me-2"></i> Delete Listing
-                  </button>
-                </form>
-              </div>
+              <h6 class="fw-bold mb-3">Questions about this place?</h6>
+              <button class="btn btn-outline-dark w-100 mb-2">
+                <i class="fas fa-question-circle me-2"></i> Ask a question
+              </button>
+              <button class="btn btn-outline-dark w-100">
+                <i class="fas fa-flag me-2"></i> Report this listing
+              </button>
             </div>
           </div>
-          <% } %>
         </div>
       </div>
     </div>
@@ -387,27 +597,209 @@
 </div>
 
 <style>
+  :root {
+    --airbnb-pink: #ff385c;
+    --airbnb-dark: #222222;
+    --airbnb-light: #717171;
+    --airbnb-bg: #f7f7f7;
+  }
+
+  .text-airbnb-pink {
+    color: var(--airbnb-pink);
+  }
+
+  .text-airbnb-dark {
+    color: var(--airbnb-dark);
+  }
+
+  .btn-airbnb {
+    background-color: var(--airbnb-pink);
+    border: none;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-airbnb:hover {
+    background-color: #e31c5f;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 56, 92, 0.3);
+  }
+
+  .btn-outline-airbnb {
+    border: 2px solid var(--airbnb-pink);
+    color: var(--airbnb-pink);
+    background-color: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline-airbnb:hover {
+    background-color: var(--airbnb-pink);
+    color: white;
+  }
+
   .sticky-top {
     position: sticky;
     z-index: 100;
   }
 
-  .text-airbnb-pink {
-    color: #ff385c;
+  .card {
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .rating-star {
+    color: #ddd;
+    transition: color 0.2s ease;
+  }
+
+  .rating-star.active {
+    color: #ffc107;
+  }
+
+  .rating-star.hover {
+    color: #ffc107;
   }
 
   .form-control:focus {
-    border-color: #ff385c;
+    border-color: var(--airbnb-pink);
     box-shadow: 0 0 0 0.25rem rgba(255, 56, 92, 0.25);
   }
 
-  .btn-airbnb {
-    background-color: #ff385c;
-    border: none;
-    color: white;
+  .badge {
+    border-radius: 8px;
+    font-weight: 500;
   }
 
-  .btn-airbnb:hover {
-    background-color: #e31c5f;
+  /* Image hover effects */
+  .position-relative img {
+    transition: transform 0.3s ease;
+  }
+
+  .position-relative:hover img {
+    transform: scale(1.02);
+  }
+
+  /* Highlight cards */
+  .card.border-0.shadow-sm {
+    transition: all 0.3s ease;
+  }
+
+  .card.border-0.shadow-sm:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
   }
 </style>
+
+<script>
+  // Star rating functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const stars = document.querySelectorAll(".rating-star");
+    const ratingValue = document.getElementById("ratingValue");
+    const ratingInput = document.getElementById("ratingInput");
+
+    if (stars.length > 0) {
+      stars.forEach((star) => {
+        star.addEventListener("click", function () {
+          const value = this.getAttribute("data-value");
+          ratingInput.value = value;
+          ratingValue.textContent = value;
+
+          stars.forEach((s) => {
+            s.classList.remove("fas", "active");
+            s.classList.add("far");
+          });
+
+          for (let i = 0; i < value; i++) {
+            stars[i].classList.remove("far");
+            stars[i].classList.add("fas", "active");
+          }
+        });
+
+        star.addEventListener("mouseover", function () {
+          const value = this.getAttribute("data-value");
+
+          stars.forEach((s) => {
+            s.classList.remove("hover");
+            const sValue = s.getAttribute("data-value");
+            if (sValue <= value) {
+              s.classList.add("hover");
+            }
+          });
+        });
+
+        star.addEventListener("mouseout", function () {
+          stars.forEach((s) => {
+            s.classList.remove("hover");
+          });
+        });
+      });
+    }
+
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Wishlist toggle
+    const wishlistBtn = document.querySelector(".fa-heart");
+    if (wishlistBtn) {
+      wishlistBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        this.classList.toggle("far");
+        this.classList.toggle("fas");
+        this.classList.toggle("text-danger");
+
+        const isAdded = this.classList.contains("fas");
+        showToast(
+          isAdded ? "Added to wishlist!" : "Removed from wishlist",
+          isAdded ? "success" : "info"
+        );
+      });
+    }
+
+    // Toast notification function
+    function showToast(message, type) {
+      const toast = document.createElement("div");
+      toast.className = `toast align-items-center text-white bg-${type} border-0`;
+      toast.setAttribute("role", "alert");
+      toast.innerHTML = `
+        <div class="d-flex">
+          <div class="toast-body">
+            <i class="fas fa-${
+              type === "success" ? "check-circle" : "info-circle"
+            } me-2"></i>
+            ${message}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+      `;
+
+      const container =
+        document.querySelector(".toast-container") || createToastContainer();
+      container.appendChild(toast);
+
+      const bsToast = new bootstrap.Toast(toast);
+      bsToast.show();
+
+      toast.addEventListener("hidden.bs.toast", function () {
+        toast.remove();
+      });
+    }
+
+    function createToastContainer() {
+      const container = document.createElement("div");
+      container.className = "toast-container position-fixed bottom-0 end-0 p-3";
+      document.body.appendChild(container);
+      return container;
+    }
+  });
+</script>
